@@ -130,7 +130,8 @@ module Fastlane
         response = http.request(request)
 
         if !response.kind_of? Net::HTTPSuccess
-          UI.user_error!("Di makuha ang URL, please check API Token / Permissions (status code: #{response.code})")
+          error_message = "Di makuha ang URL, please check API Token / Permissions (status code: #{response.code}). Response Body: #{response.body}"
+          UI.user_error!(error_message)
           responseData["success"] = false
           return responseData
         end
