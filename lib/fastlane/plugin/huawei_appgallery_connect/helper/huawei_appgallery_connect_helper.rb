@@ -112,6 +112,8 @@ module Fastlane
         responseData["success"] = false
         responseData["code"] = 0
 
+        UI.message("pass")
+        
         if(is_aab)
           uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{app_id}&suffix=aab")
           UI.message(uri)
