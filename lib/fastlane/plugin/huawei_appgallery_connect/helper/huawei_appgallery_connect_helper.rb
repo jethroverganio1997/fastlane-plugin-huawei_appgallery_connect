@@ -17,7 +17,7 @@ module Fastlane
         res = http.request(req)
 
         result_json = JSON.parse(res.body)
-
+        UI.important("#{result_json}")
         return result_json['access_token']
       end
 
