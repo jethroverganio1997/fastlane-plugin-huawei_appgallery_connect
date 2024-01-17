@@ -113,9 +113,11 @@ module Fastlane
         responseData["code"] = 0
 
         UI.message("pass")
-        encoded_app_id = CGI.escape(app_id)
         if(is_aab)
-          uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{encoded_app_id}&suffix=aab")
+          base_uri = "https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?"
+          query_params = "appId=#{app_id}&suffix=aab"
+          uri = URI.parse(base_uri + query_params)
+
           UI.message(uri)
           upload_filename = "app-huawei-release.aab"
         else
