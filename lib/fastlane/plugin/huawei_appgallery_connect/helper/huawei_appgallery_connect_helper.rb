@@ -86,8 +86,6 @@ module Fastlane
         request["client_id"] = client_id
         request["Authorization"] = "Bearer #{token}"
         request["Content-Type"] = "application/json"
-        UI.message(client_id)
-        UI.message("Bearer #{token}")
 
         request.body = {privacyPolicy: privacy_policy_url}.to_json
 
@@ -128,6 +126,7 @@ module Fastlane
         request["client_id"] = client_id
         request["Authorization"] = "Bearer #{token}"
         request["Content-Type"] = "application/json"
+        UI.message(request)
 
         response = http.request(request)
 
