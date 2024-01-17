@@ -106,14 +106,14 @@ module Fastlane
 
 
       def self.upload_app(token, client_id, app_id, apk_path, is_aab)
-        UI.message("Fetching upload URL")
+        UI.message("Fetching upload URL pota")
 
         responseData = JSON.parse("{}")
         responseData["success"] = false
         responseData["code"] = 0
 
         UI.message("pass")
-        
+
         if(is_aab)
           uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{app_id}&suffix=aab")
           UI.message(uri)
