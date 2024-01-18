@@ -120,9 +120,13 @@ module Fastlane
          UI.message(app_id)
         encoded_app_id = URI.encode_www_form_component(app_id)
         UI.message(encoded_app_id)
+        UI.message("awat")
+
+        CGI.escape(app_id)
+        UI.message(app_id)
 
         # Construct the URI with properly encoded parameters
-        uri = URI.encode_www_form_component("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{app_id}&suffix=aab")
+        uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{app_id}&suffix=aab")
         UI.message(uri)
           upload_filename = "app-huawei-release.aab"
         else
