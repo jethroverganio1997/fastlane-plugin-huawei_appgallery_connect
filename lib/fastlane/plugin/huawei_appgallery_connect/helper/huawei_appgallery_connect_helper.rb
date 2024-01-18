@@ -136,7 +136,7 @@ module Fastlane
 
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = true
-        request = Net::HTTP::Get.new(uri.request_uri)
+        request = Net::HTTP::Get.new(uri)
         request["client_id"] = client_id
         request["Authorization"] = "Bearer #{token}"
         request["Content-Type"] = "application/json"
