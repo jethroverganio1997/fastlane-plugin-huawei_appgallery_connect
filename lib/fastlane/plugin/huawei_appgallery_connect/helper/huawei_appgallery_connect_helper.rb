@@ -1,4 +1,6 @@
 require 'fastlane_core/ui/ui'
+require 'uri'
+require 'net/http'
 require 'cgi'
 
 module Fastlane
@@ -114,12 +116,18 @@ module Fastlane
 
         UI.message("pass")
         if(is_aab)
-          base_uri = "https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?"
-          query_params = "appId=108826211&suffix=aab"
-          uri = URI.parse(base_uri + query_params)
+          # Encode the app_id value
+          encoded_app_id = CGI.escape(app_id)
+
+          # Construct the URI with properly encoded parameters
+          uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url")
+          uri.query = URI.encode_www_form({
+            'appId' => encoded_app_id,
+            'suffix' => 'aab'
+          })
 
           UI.message(uri)
-          upload_filename = "app-huawei-release.aab"
+          upload_filename = "app-huawei-release.aab"sss
         else
           uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{app_id}&suffix=apk")
           upload_filename = "release.apk"
