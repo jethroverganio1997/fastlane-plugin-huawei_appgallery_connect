@@ -190,13 +190,17 @@ module Fastlane
             request["Authorization"] = "Bearer #{token}"
             request["Content-Type"] = "application/json"
 
-            data = {fileType: 5, files: [{
+            UI.important("Pass2")
+
+            data = {fileType: 5, files: {
 
                 fileName: upload_filename,
                 fileDestUrl: result_json['result']['UploadFileRsp']['fileInfoList'][0]['fileDestUlr'],
-                size: result_json['result']['UploadFileRsp']['fileInfoList'][0]['size'].to_s
 
-            }] }.to_json
+
+            } }.to_json
+            # size: result_json['result']['UploadFileRsp']['fileInfoList'][0]['size'].to_s
+            UI.important(data)
 
             request.body = data
             response = http.request(request)
