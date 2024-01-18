@@ -114,7 +114,7 @@ module Fastlane
         responseData["success"] = false
         responseData["code"] = 0
 
-        UI.message("pass")
+        UI.message("pass pota")
         if(is_aab)
           # Encode the app_id value
           encoded_app_id = CGI.escape(app_id)
