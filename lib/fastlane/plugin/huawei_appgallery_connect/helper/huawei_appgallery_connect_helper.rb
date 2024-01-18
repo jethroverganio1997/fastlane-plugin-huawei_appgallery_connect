@@ -19,7 +19,7 @@ module Fastlane
         res = http.request(req)
 
         result_json = JSON.parse(res.body)
-        UI.important("#{result_json}")
+
         return result_json['access_token']
       end
 
@@ -109,6 +109,7 @@ module Fastlane
 
       def self.upload_app(token, client_id, app_id, apk_path, is_aab)
         UI.message("Fetching upload URL pota")
+        clean_app_id = app_id.gsub(/["',]/, '')
 
         responseData = JSON.parse("{}")
         responseData["success"] = false
@@ -116,12 +117,9 @@ module Fastlane
 
         UI.message("pass pota")
         if(is_aab)
-
-        clean_app_id = app_id.gsub(/["',]/, '')
-        # Construct the URI with properly encoded parameters
         uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{clean_app_id}&suffix=aab")
         UI.message(uri)
-          upload_filename = "app-huawei-release.aab"
+        upload_filename = "app-huawei-release.aab"
         else
           uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{app_id}&suffix=apk")
           upload_filename = "release.apk"
@@ -184,17 +182,13 @@ module Fastlane
             request["Authorization"] = "Bearer #{token}"
             request["Content-Type"] = "application/json"
 
-            UI.important("Pass2")
-
             data = {fileType: 5, files: {
 
                 fileName: upload_filename,
                 fileDestUrl: result_json['result']['UploadFileRsp']['fileInfoList'][0]['fileDestUlr'],
 
-
             } }.to_json
             # size: result_json['result']['UploadFileRsp']['fileInfoList'][0]['size'].to_s
-            UI.important(data)
 
             request.body = data
             response = http.request(request)
