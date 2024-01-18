@@ -117,11 +117,13 @@ module Fastlane
         UI.message("pass pota")
         if(is_aab)
          # Manually encode the app_id parameter
+         UI.message(app_id)
         encoded_app_id = URI.encode_www_form_component(app_id)
+        UI.message(encoded_app_id)
 
         # Construct the URI with properly encoded parameters
-        uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{encoded_app_id}&suffix=aab")
-
+        uri = URI.encode_www_form_component("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{app_id}&suffix=aab")
+        UI.message(uri)
           upload_filename = "app-huawei-release.aab"
         else
           uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{app_id}&suffix=apk")
@@ -139,7 +141,7 @@ module Fastlane
         response = http.request(request)
 
         if !response.kind_of? Net::HTTPSuccess
-          error_message = "Di makuha ang URL, please check API Token / Permissions (status code: #{response.code}). Response Body: #{response}"
+          error_message = "Di makuha ang URL POTA, please check API Token / Permissions (status code: #{response.code}). Response Body: #{response}"
           UI.user_error!(error_message)
           responseData["success"] = false
           return responseData
