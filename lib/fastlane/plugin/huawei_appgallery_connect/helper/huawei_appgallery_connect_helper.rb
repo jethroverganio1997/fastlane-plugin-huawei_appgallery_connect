@@ -176,7 +176,7 @@ module Fastlane
             UI.important("Saving app information")
 
             uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/app-file-info?appId=#{clean_app_id}")
-
+            UI.important("uri")
             http = Net::HTTP.new(uri.host, uri.port)
             http.use_ssl = true
             request = Net::HTTP::Put.new(uri.request_uri)
