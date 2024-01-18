@@ -124,7 +124,7 @@ module Fastlane
 
         CGI.escape(app_id)
         UI.message(app_id)
-        clean_app_id = app_id.gsub(/["']/, '')
+        clean_app_id = app_id.gsub(/["',]/, '')
         # Construct the URI with properly encoded parameters
         uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{clean_app_id}&suffix=aab")
         UI.message(uri)
