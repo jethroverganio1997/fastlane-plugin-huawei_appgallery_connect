@@ -127,7 +127,7 @@ module Fastlane
           })
 
           UI.message(uri)
-          upload_filename = "app-huawei-release.aab"sss
+          upload_filename = "app-huawei-release.aab"
         else
           uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{app_id}&suffix=apk")
           upload_filename = "release.apk"
