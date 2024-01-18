@@ -116,14 +116,7 @@ module Fastlane
 
         UI.message("pass pota")
         if(is_aab)
-         # Manually encode the app_id parameter
-         UI.message(app_id)
-        encoded_app_id = URI.encode_www_form_component(app_id)
-        UI.message(encoded_app_id)
-        UI.message("awat")
 
-        CGI.escape(app_id)
-        UI.message(app_id)
         clean_app_id = app_id.gsub(/["',]/, '')
         # Construct the URI with properly encoded parameters
         uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{clean_app_id}&suffix=aab")
@@ -182,7 +175,7 @@ module Fastlane
             UI.success('Upload app to AppGallery Connect successful')
             UI.important("Saving app information")
 
-            uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/app-file-info?appId=#{app_id}")
+            uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/app-file-info?appId=#{clean_app_id}")
 
             http = Net::HTTP.new(uri.host, uri.port)
             http.use_ssl = true
