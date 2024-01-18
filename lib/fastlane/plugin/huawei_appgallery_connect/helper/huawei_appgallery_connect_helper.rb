@@ -120,7 +120,7 @@ module Fastlane
 
           # Construct the URI with properly encoded parameters
           uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{app_id}&suffix=aab")
-          CGI.unescape(uri)
+          CGI.escape(uri)
           UI.message(uri)
           upload_filename = "app-huawei-release.aab"
         else
