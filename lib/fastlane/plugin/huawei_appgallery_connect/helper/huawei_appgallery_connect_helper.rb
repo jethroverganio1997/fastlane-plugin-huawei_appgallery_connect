@@ -117,15 +117,10 @@ module Fastlane
         UI.message("pass pota")
         if(is_aab)
           # Encode the app_id value
-          encoded_app_id = CGI.escape(app_id)
 
           # Construct the URI with properly encoded parameters
-          uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url")
-          uri.query = URI.encode_www_form({
-            'appId' => encoded_app_id,
-            'suffix' => 'aab'
-          })
-
+          uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{app_id}&suffix=aab")
+          CGI.unescape(uri)
           UI.message(uri)
           upload_filename = "app-huawei-release.aab"
         else
