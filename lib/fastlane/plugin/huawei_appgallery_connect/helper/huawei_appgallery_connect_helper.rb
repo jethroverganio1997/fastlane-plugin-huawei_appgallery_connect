@@ -120,7 +120,7 @@ module Fastlane
 
           # Construct the URI with properly encoded parameters
           uri = URI.parse("https://connect-api.cloud.huawei.com/api/publish/v2/upload-url?appId=#{app_id}&suffix=aab")
-          CGI.escape(uri)
+          CGI.unescape(uri)
           UI.message(uri)
           upload_filename = "app-huawei-release.aab"
         else
@@ -130,7 +130,7 @@ module Fastlane
 
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = true
-        request = Net::HTTP::Get.new(uri.request_uri)
+        request = Net::HTTP::Get.new(uri)
         request["client_id"] = client_id
         request["Authorization"] = "Bearer #{token}"
         request["Content-Type"] = "application/json"
